@@ -5,7 +5,7 @@ const app = express();
 require('dotenv').config();
 const router = express.Router();
 const port = process.env.PORT || 3000;
-const dbConnection = require('./dbConnection');
+const dbConnection = require('../dbConnection');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
