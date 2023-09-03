@@ -82,4 +82,7 @@ process.on('exit', () => {
     dbConnection.end();
 });
 
-module.exports = router; 
+module.exports = {
+    login,
+    register,
+};

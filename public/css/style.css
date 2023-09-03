@@ -40,6 +40,18 @@ button:hover {
     background-color: lightblue;
 }
 
+.mainpage-upper img{
+    height: fit-content;
+    width: fit-content;
+}
+
+
+
+
+
+
+
+
 .muscle-groups {
     position: relative;
     background: #eee;
