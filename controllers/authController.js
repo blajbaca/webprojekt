@@ -1,17 +1,16 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const mysql = require('mysql');
 const app = express();
 require('dotenv').config();
 const router = express.Router();
-const port = process.env.PORT || 3000;
+const port = process.env.SERVER_PORT || 3000; 
 const dbConnection = require('../dbConnection');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-app.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
