@@ -15,17 +15,18 @@ app.use(express.static(__dirname + '/views'));
 
 
 app.use('/auth', authController);
+app.get('/', (req, res) => {
+  res.status(404).send('404 URL NOT FOUND'); 
+});
 
 const server = http.createServer(app);
 
 server.listen(port, address, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html');
+  console.log(`Server is running on localhost:`+port);
 });
 
 process.on('exit', () => {
     dbConnection.end(); 
   });
+
+console.log(__dirname + '\\views\\index.html');
