@@ -1,14 +1,12 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const app = express();
-require('dotenv').config();
 const router = express.Router();
-const port = process.env.SERVER_PORT || 3000; 
+require('dotenv').config();
 const dbConnection = require('../dbConnection');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+router.use(express.static('public'));
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -31,7 +29,7 @@ router.post('/login', async (req, res) => {
             const passwordMatch = await bcrypt.compare(password, user.password);
 
             if (passwordMatch) {
-                res.status(200).send('Authentication successful');
+                res.redirect('/workouts');
             } else {
                 res.status(401).send('Invalid credentials');
             }
@@ -68,7 +66,7 @@ router.post('/register', async (req, res) => {
                     console.error('Database insert error:', insertError);
                     res.status(500).send('Database error');
                 } else {
-                    res.status(201).send('User registered successfully');
+                    res.redirect('workouts');
                 }
             });
         });
@@ -82,7 +80,4 @@ process.on('exit', () => {
     dbConnection.end();
 });
 
-module.exports = {
-    login,
-    register,
-};
+module.exports = router;

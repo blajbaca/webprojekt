@@ -4,40 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <title>The Exercise Database</title>
 </head>
 <body>
     <nav class="navbar">
         <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Workouts</a></li>
-            <li><a href="">Register/Login</a></li>
-            <li><a href="">About</a></li>
-          </ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/workouts">Workouts</a></li>
+            <li><a href="/login">Log in</a></li>
+        </ul>
     </nav>
-    <h1>
-        The excercise database - All your workouts in one place!
-    </h1>
+    <h1>The Exercise Database - All Your Workouts in One Place!</h1>
     <section>
         <div class="mainpage-upper">
-            <div>
+            <div class="desription">
                 A webpage created for people who work out! <br>
-                Store all your excercises in one place, sort them by muscle group for easy access and simplicity. <br>
-                Plan your workouts and never need to google how a particular excercise is done! <br>
+                Store all your exercises in one place, sort them by muscle group for easy access and simplicity. <br>
+                Plan your workouts and never need to google how a particular exercise is done! <br>
             </div>
-            <div>
-                <img src="assets\stickmanDumbells.jpg" alt="logo">
+            <div class="image-container">
+                <img src="assets/stickmanDumbells.jpg" alt="logo">
             </div>
         </div>
         <div class="useraccountpart">
             <p>A user account is necessary to use this webpage!</p> 
             <div class="button-container">
-                <button class="login">
-                    Log in
-                </button>
-                <button>
-                    Register
-                </button>
+                <a href="/login"><button class="login">Log in</button></a>
+                <a href="/register"><button class="register">Register</button></a>
             </div>
         </div>
     </section>

@@ -1,6 +1,7 @@
 const http = require('http');
 const dbConnection = require('./dbConnection');
-const authController = require('./controllers/authController');
+const authRoutes = require('./routes/authRoutes');
+const exerciseRoutes = require('./routes/exerciseRoutes');
 const express = require('express');
 const app = express();
 const port = process.env.SERVER_PORT; 
@@ -12,12 +13,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('views'));
+app.use('/auth', authRoutes);
+app.use('/exercises', exerciseRoutes);
 
-
-app.use('/auth', authController);
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
+
+app.get('/login', (req,res) => {
+  res.sendFile(__dirname + '/views/loginLanding.html');
+})
+
+app.get('/register', (req,res) => {
+  res.sendFile(__dirname + '/views/registerLanding.html');
+})
+
+app.get('/workouts', (req,res) => {
+  res.sendFile(__dirname + '/views/workouts.html');
+})
 
 const server = http.createServer(app);
 

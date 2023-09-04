@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <title>Register</title>
 </head>
-
 <body>
     <nav class="navbar">
         <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Workouts</a></li>
-            <li><a href="">Register/Login</a></li>
-            <li><a href="">About</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/exercises">Workouts</a></li>
+            <li><a href="/login">Log in</a></li>
         </ul>
     </nav>
-    <h1>
-        The excercise database - All your workouts in one place!
-    </h1>
+    <h1>Register</h1>
     <section>
-        <form>
-            <div class="container">
-                <label>Username : </label>
-                <input type="text" placeholder="Enter Username" name="username" required>
-                <label>Password : </label>
-                <input type="password" placeholder="Enter Password" name="password" required>
-                <label>Repeat Password : </label>
-                <input type="password" placeholder="Repeat Password" name="password-repeat" required>
-                <button type="submit">Register</button>
-            </div>
-        </form>
+        <div class="form-container">
+            <form action="/auth/register" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username:</label>
+                    <input class="form-control" type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password:</label>
+                    <input class="form-control" type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button class="form-submit-button" type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a class="form-link" href="/login">Login</a></p>
+        </div>
     </section>
 </body>
-
 </html>

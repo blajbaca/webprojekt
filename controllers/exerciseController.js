@@ -50,8 +50,4 @@ router.delete('/workouts/:id', (req, res) => {
     });
 });
 
-module.exports = {
-    getExercisesByMuscle,
-    addExercise,
-    deleteExercise,
-};
+module.exports = router;
