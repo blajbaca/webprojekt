@@ -32,6 +32,10 @@ app.get('/workouts', (req,res) => {
   res.sendFile(__dirname + '/views/workouts.html');
 })
 
+app.get('/insert', (req,res) => {
+  res.sendFile(__dirname + '/views/newExerciseLanding.html');
+})
+
 const server = http.createServer(app);
 
 server.listen(port, address, () => {

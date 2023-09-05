@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Exercise</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/workouts">Workouts</a></li>
+                <li><a href="/login">Log in</a></li>
+                <li><a href="/insert">Insert</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Add New Exercise</h1>
+        <form class="form-container" action="/exercises/add" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="name">Exercise Name</label>
+                <input class="form-control" type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="muscleGroup">Muscle Group</label>
+                <input class="form-control" type="text" id="muscleGroup" name="muscleGroup" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="exerciseLink">Exercise YouTube Link</label>
+                <input class="form-control" type="text" id="exerciseLink" name="exerciseLink" required>
+            </div>
+            <button class="form-submit-button" type="submit">Add Exercise</button>
+        </form>
+    </div>
+</body>
+</html>

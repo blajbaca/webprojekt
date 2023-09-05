@@ -2,28 +2,29 @@ const express = require('express');
 const router = express.Router();
 const dbConnection = require('../dbConnection');
 
-router.get('/workouts/:muscleGroup', (req, res) => {
+router.get('/:muscleGroup', (req, res) => {
     const muscleGroup = req.params.muscleGroup;
+    res.setHeader('Content-Type', 'application/json');
+    const query = 'SELECT name, muscleGroup, exerciseLink FROM workouts WHERE muscleGroup = ?';
     
-    const query = 'SELECT name, muscleGroup, imageSource FROM workouts WHERE muscleGroup = ?';
-    
-    dbConnection.query(query, [muscleGroup], (error) => {
+    dbConnection.query(query, [muscleGroup], (error, results) => {
         if (error) {
             console.error('Database query error:', error);
             res.status(500).send('Database error');
             return;
         }
-
-        res.status(200).send("Workout fetch successful");
+        
+        console.log(results);
+        res.status(200).json(results);
     });
 });
 
-router.post('/workouts', (req, res) => {
-    const { name, muscleGroup, imageSource } = req.body;
+router.post('/add', (req, res) => {
+    const { name, muscleGroup, exerciseLink } = req.body;
 
-    const insertQuery = 'INSERT INTO workouts (name, muscleGroup, imageSource) VALUES (?, ?, ?)';
+    const insertQuery = 'INSERT INTO workouts (name, muscleGroup, exerciseLink) VALUES (?, ?, ?)';
     
-    dbConnection.query(insertQuery, [name, muscleGroup, imageSource], (error) => {
+    dbConnection.query(insertQuery, [name, muscleGroup, exerciseLink], (error) => {
         if (error) {
             console.error('Database insert error:', error);
             res.status(500).send('Database error');
@@ -34,7 +35,7 @@ router.post('/workouts', (req, res) => {
     });
 });
 
-router.delete('/workouts/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const workoutId = req.params.id;
 
     const deleteQuery = 'DELETE FROM workouts WHERE id = ?';
