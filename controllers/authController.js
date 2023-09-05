@@ -66,7 +66,7 @@ router.post('/register', async (req, res) => {
                     console.error('Database insert error:', insertError);
                     res.status(500).send('Database error');
                 } else {
-                    res.redirect('workouts');
+                    res.redirect('/workouts');
                 }
             });
         });

@@ -14,7 +14,6 @@ router.get('/:muscleGroup', (req, res) => {
             return;
         }
         
-        console.log(results);
         res.status(200).json(results);
     });
 });

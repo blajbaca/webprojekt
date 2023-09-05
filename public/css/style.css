@@ -150,4 +150,7 @@ button.register:hover {
   .form-link:hover {
     text-decoration: underline;
   }
-  
+
+  .workouts a{
+        padding:10px;
+  }
