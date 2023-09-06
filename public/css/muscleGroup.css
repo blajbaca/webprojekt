@@ -6,12 +6,12 @@
     border-radius: 5px;
     box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, .5);
     overflow: hidden;
-    border-top: 0.75rem solid #00bcd4;
+    border-top: 0.75rem solid #333;
 }
 .muscle-groups h1 {
     margin: -0.5rem -1rem 1rem;
     padding: 0 1rem 0.75rem;
-    background: #00bcd4;
+    background: #333;
     color: #eee;
     text-align: center;
     font-size: 1.25rem;
