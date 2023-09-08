@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const titleElement = document.getElementById('text-title');
 
   checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
+    checkbox.addEventListener('change', async () => {
       workoutList.innerHTML = '';
       titleElement.textContent = '';
 
@@ -18,31 +18,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
       titleElement.textContent = `Workouts for: ${selectedMuscle}`;
 
-      fetch(`/exercises/${selectedMuscle}`)
-        .catch((error) => {
-          console.error('Fetch error:', error);
-        })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          data.forEach((workout) => {
-            const listItem = document.createElement('li');
-            listItem.textContent = workout.name;
+      try {
+        const response = await fetch(`/exercises/${selectedMuscle}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
 
-            const videoLink = document.createElement('a');
-            videoLink.href = workout.exerciseLink;
+        data.forEach(workout => {
+          const listItem = document.createElement('li');
+          listItem.textContent = workout.name;
 
-            videoLink.textContent = 'Watch on YouTube';
+          const videoLink = document.createElement('a');
+          videoLink.href = workout.exerciseLink;
+          videoLink.textContent = 'Watch on YouTube';
 
-            listItem.appendChild(videoLink);
+          listItem.appendChild(videoLink);
 
-            workoutList.appendChild(listItem);
-          });
+          workoutList.appendChild(listItem);
         });
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
     });
   });
 });
