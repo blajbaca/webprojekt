@@ -4,10 +4,11 @@ const dbConnection = require('../dbConnection');
 
 router.get('/:muscleGroup', (req, res) => {
     const muscleGroup = req.params.muscleGroup;
+    const loggedUser=req.session.username;
     res.setHeader('Content-Type', 'application/json');
-    const query = 'SELECT name, muscleGroup, exerciseLink FROM workouts WHERE muscleGroup = ?';
+    const query = "SELECT name, muscleGroup, exerciseLink FROM workouts WHERE muscleGroup = ? AND (addedBy = ? OR addedBy = 'default') ";
     
-    dbConnection.query(query, [muscleGroup], (error, results) => {
+    dbConnection.query(query, [muscleGroup,loggedUser], (error, results) => {
         if (error) {
             console.error('Database query error:', error);
             res.status(500).send('Database error');
@@ -20,17 +21,17 @@ router.get('/:muscleGroup', (req, res) => {
 
 router.post('/add', (req, res) => {
     const { name, muscleGroup, exerciseLink } = req.body;
-
-    const insertQuery = 'INSERT INTO workouts (name, muscleGroup, exerciseLink) VALUES (?, ?, ?)';
+    const loggedUser=req.session.username; 
+    const insertQuery = 'INSERT INTO workouts (name, muscleGroup, exerciseLink, addedBy) VALUES (?, ?, ?, ?)';
     
-    dbConnection.query(insertQuery, [name, muscleGroup, exerciseLink], (error) => {
+    dbConnection.query(insertQuery, [name, muscleGroup, exerciseLink, loggedUser], (error) => {
         if (error) {
             console.error('Database insert error:', error);
             res.status(500).send('Database error');
             return;
         }
 
-        res.status(201).send('Workout added successfully');
+        res.redirect('/workouts');
     });
 });
 

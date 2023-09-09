@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 require('dotenv').config();
 const dbConnection = require('../dbConnection');
+const session = require('express-session');
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -10,7 +11,7 @@ router.use(express.static('public'));
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-
+    
     try {
         const query = 'SELECT id, username, password FROM users WHERE username = ?';
         dbConnection.query(query, [username], async (error, results) => {
@@ -29,6 +30,7 @@ router.post('/login', async (req, res) => {
             const passwordMatch = await bcrypt.compare(password, user.password);
 
             if (passwordMatch) {
+                req.session.username=username;
                 res.redirect('/workouts');
             } else {
                 res.status(401).send('Invalid credentials');
@@ -66,7 +68,7 @@ router.post('/register', async (req, res) => {
                     console.error('Database insert error:', insertError);
                     res.status(500).send('Database error');
                 } else {
-                    res.redirect('/workouts');
+                    res.redirect('/login');
                 }
             });
         });
